@@ -80,12 +80,18 @@ func (p PlatinumSearcher) patternFrom(args []string) string {
 	return args[0]
 }
 
-func (p PlatinumSearcher) rootsFrom(args []string) []string {
+func (p PlatinumSearcher) rootsFrom(args []string) (roots []string) {
 	if len(args) > 1 {
-		return args[1:]
+		roots = args[1:]
 	} else {
-		return []string{"."}
+		roots = []string{"."}
 	}
+	for i, root := range roots {
+		if absRoot, err := filepath.Abs(root); err == nil {
+			roots[i] = absRoot
+		}
+	}
+	return roots
 }
 
 func (p PlatinumSearcher) givenStdin() bool {
