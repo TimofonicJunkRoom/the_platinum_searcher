@@ -5,6 +5,7 @@ import "github.com/jessevdk/go-flags"
 // Top level options
 type Option struct {
 	Version      bool          `long:"version" description:"Show version"`
+	Profile      bool          `short:"p" description:"profile"`
 	OutputOption *OutputOption `group:"Output Options"`
 	SearchOption *SearchOption `group:"Search Options"`
 }

@@ -10,6 +10,7 @@ import (
 	"github.com/monochromegane/conflag"
 	"github.com/monochromegane/go-home"
 	"github.com/monochromegane/terminal"
+	"github.com/pkg/profile"
 )
 
 const version = "2.0.2"
@@ -40,6 +41,10 @@ func (p PlatinumSearcher) Run(args []string) int {
 	args, err := parser.ParseArgs(args)
 	if err != nil {
 		return ExitCodeError
+	}
+
+	if opts.Profile {
+		defer profile.Start(profile.CPUProfile).Stop()
 	}
 
 	if opts.Version {
